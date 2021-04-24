@@ -7,6 +7,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      overlay: true,
       gameStarted: false,
       cards: [],
       firstClick: {
@@ -37,8 +38,8 @@ class App extends Component {
     return array;
   }
 
-  removeOverlay = () => {
-    this.setState({ gameStarted: true })
+  startGame = () => {
+    this.setState({ overlay: false, gameStarted: true })
     this.resetGame();
   }
 
@@ -101,6 +102,7 @@ class App extends Component {
       tempState.cards[stateIndex1].status = newStatus
       tempState.cards[stateIndex2].status = newStatus
       this.setState({ 
+        overlay: false,
         cards: tempState.cards,
         firstClick: { id: null, name: null },
         playerTurn: tempState.playerTurn })
@@ -109,7 +111,7 @@ class App extends Component {
   }
 
   cardClick = (cardID, cardStatus, cardName) => {
-    let tempState = this.state
+    let tempState = this.state;
     let i = (tempState.cards).findIndex((stateCard) => stateCard.id === cardID)
     switch (cardStatus) {
       case "waiting":
@@ -123,6 +125,7 @@ class App extends Component {
           })
           console.log(this.state)
         } else { //second click of pair
+          this.setState({ overlay: true }) //prevents player from clicking again before match finishes
           let matchIndex = (tempState.cards).findIndex((stateCard) => stateCard.id === tempState.firstClick.id)
           //turns over clicked card
           this.setState({ 
@@ -158,10 +161,15 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        {this.state.gameStarted ? null :
-          <div id="overlay">
-            <button id="start" onClick={this.removeOverlay}>Start Game</button>
-          </div>}
+        {this.state.overlay 
+        ? <div id="overlay">
+          {this.state.gameStarted 
+            ? null 
+            : <button id="start" onClick={this.startGame}>Start Game</button>
+          }
+          </div>
+        : null 
+        }
         <Board bank={this.state.cards} cardClick={this.cardClick} />
       </div>
     );

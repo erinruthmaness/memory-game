@@ -12,10 +12,11 @@
 
 #overlay button {
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 6;
+  padding: 10px;
   font-size: 24px;
   cursor: pointer;
 }
