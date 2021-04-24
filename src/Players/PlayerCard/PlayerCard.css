@@ -1,0 +1,22 @@
+.player {
+    margin: 20px auto;
+    width: 40%;
+    font-size: 18px;
+}
+
+.player tr {
+    margin: 5px;
+}
+
+.player td {
+    width: 50%;
+}
+
+td.label {
+    text-align: right;
+}
+
+td.input {
+    text-align: left;
+    font-weight: bold;
+}

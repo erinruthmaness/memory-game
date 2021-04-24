@@ -1,0 +1,16 @@
+#player-bank {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-bottom: 1px solid gray;
+    box-shadow: 1px 1px 2px #00000075;
+    cursor: default;
+}
+
+#player-bank.on-top {
+    background-color: white;
+    z-index: 10;
+}

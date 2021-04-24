@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 
+import Overlay from '../Page/Overlay/Overlay';
+import PlayerDash from '../Players/Dash/Dash';
+import Board from '../Game/Board/Board';
+import bank from '../Game/bank';
 import './App.css';
-import Board from './Board/Board'
 
 class App extends Component {
   constructor(props) {
@@ -9,12 +12,13 @@ class App extends Component {
     this.state = {
       overlay: true,
       gameStarted: false,
+      setup: false,
       cards: [],
       firstClick: {
         name: null,
         id: null
       },
-      playerTurn: 0
+      playerTurn: 0,
     };
   }
 
@@ -38,35 +42,39 @@ class App extends Component {
     return array;
   }
 
-  startGame = () => {
-    this.setState({ overlay: false, gameStarted: true })
-    this.resetGame();
+  setUpGame = () => {
+    this.setState({
+      setup: true,
+    })
   }
 
-  resetGame = () => {
-    let bank = [
-      { id: 1, u1: "0xD83C", u2: "0xDF37", name: "tulip", status: "waiting" },
-      { id: 2, u1: "0xD83C", u2: "0xDF37", name: "tulip", status: "waiting" },
-      { id: 3, u1: "0xD83C", u2: "0xDF38", name: "sakura", status: "waiting" },
-      { id: 4, u1: "0xD83C", u2: "0xDF38", name: "sakura", status: "waiting" },
-      { id: 5, u1: "0xD83C", u2: "0xDF3B", name: "sunflower", status: "waiting" },
-      { id: 6, u1: "0xD83C", u2: "0xDF3B", name: "sunflower", status: "waiting" },
-      { id: 7, u1: "0xD83C", u2: "0xDF08", name: "rainbow", status: "waiting" },
-      { id: 8, u1: "0xD83C", u2: "0xDF08", name: "rainbow", status: "waiting" },
-      { id: 9, u1: "0xD83C", u2: "0xDF35", name: "cactus", status: "waiting" },
-      { id: 10, u1: "0xD83C", u2: "0xDF35", name: "cactus", status: "waiting" },
-      { id: 11, u1: "0xD83C", u2: "0xDF3A", name: "hibiscus", status: "waiting" },
-      { id: 12, u1: "0xD83C", u2: "0xDF3A", name: "hibiscus", status: "waiting" },
-      { id: 13, u1: "0xD83C", u2: "0xDF44", name: "mushroom", status: "waiting" },
-      { id: 14, u1: "0xD83C", u2: "0xDF44", name: "mushroom", status: "waiting" },
-      { id: 15, u1: "0xD83C", u2: "0xDF3C", name: "daisy", status: "waiting" },
-      { id: 16, u1: "0xD83C", u2: "0xDF3C", name: "daisy", status: "waiting" },
-      { id: 17, u1: "0xD83C", u2: "0xDF39", name: "rose", status: "waiting" },
-      { id: 18, u1: "0xD83C", u2: "0xDF39", name: "rose", status: "waiting" },
-      { id: 19, u1: "0xD83C", u2: "0xDF33", name: "tree", status: "waiting" },
-      { id: 20, u1: "0xD83C", u2: "0xDF33", name: "tree", status: "waiting" }
-    ]
-    this.setState({ cards: this.shuffle(bank), playerTurn: 1 })
+  startGame = () => {
+    console.log(this.state)
+    //initial "Start Game button"
+    if (!this.state.gameStarted && !this.state.setup) {
+      console.log("start game");
+      this.setState({
+        setup: true
+      })
+      console.log(this.state)
+    } else if (!this.state.gameStarted && this.state.setup) {
+      //"play!" button after setting names
+      console.log("play");
+      this.setState ({
+        overlay: false,
+        gameStarted: true,
+        setup: false,
+        playerTurn: 1
+      })
+      console.log(this.state)
+      this.resetBoard();
+    } else {
+      console.log("error: gameStarted is " + this.state.gameStarted + " and setup is " + this.state.setup);
+    }
+  }
+
+  resetBoard = () => {
+    this.setState({ cards: this.shuffle(bank) })
   }
 
   nextPlayer = (playerTurn) => {
@@ -87,7 +95,7 @@ class App extends Component {
     if (card1temp.name === card2temp.name) {
       animationStatus = "match"
       newStatus = "removed";
-    } else { 
+    } else {
       animationStatus = "no-match"
       newStatus = "waiting";
       tempState.playerTurn = this.nextPlayer(tempState.playerTurn)
@@ -101,11 +109,12 @@ class App extends Component {
       //back to the cardClick function, which will set it to state and resume the game 
       tempState.cards[stateIndex1].status = newStatus
       tempState.cards[stateIndex2].status = newStatus
-      this.setState({ 
+      this.setState({
         overlay: false,
         cards: tempState.cards,
         firstClick: { id: null, name: null },
-        playerTurn: tempState.playerTurn })
+        playerTurn: tempState.playerTurn
+      })
       console.log(this.state)
     }, 1000)
   }
@@ -119,7 +128,7 @@ class App extends Component {
         //first click of pair
         if (tempState.firstClick.id === null) {
           tempState.firstClick = { id: cardID, name: cardName }
-          this.setState({ 
+          this.setState({
             cards: tempState.cards,
             firstClick: tempState.firstClick
           })
@@ -128,7 +137,7 @@ class App extends Component {
           this.setState({ overlay: true }) //prevents player from clicking again before match finishes
           let matchIndex = (tempState.cards).findIndex((stateCard) => stateCard.id === tempState.firstClick.id)
           //turns over clicked card
-          this.setState({ 
+          this.setState({
             cards: tempState.cards,
           })
           //timer for a second so player can look at both cards
@@ -139,7 +148,7 @@ class App extends Component {
         break;
       case "clicked":
         tempState.cards[i].status = "waiting"
-        this.setState({ 
+        this.setState({
           cards: tempState.cards,
         })
         break;
@@ -151,27 +160,48 @@ class App extends Component {
   }
 
   componentDidMount() {
-    //roll up a new game
     console.log("app mounted")
-    if (!this.state.gameStarted) {
-      this.resetGame();
-    }
+    console.log(this.state)
   }
 
   render() {
+
+    // {!this.state.gameStarted
+    //   ? <button id="start" onClick={this.startGame}>Start Game</button>
+    //   : <article className={`player-setup${(this.state.setup) ? "" : " hide-setup"}`}>
+    //     {(!this.state.players[0].set)
+    //       ? <section className="player-setup-panel">
+    //         <label htmlFor="player1-setup">Player 1 Name:</label>
+    //         <input id="setupplayer-1" name="player1-setup" value={this.state.players[0].name}
+    //           onChange={(e) => this.handlePlayerNameChange(e, 1)}></input>
+    //         <button onClick={this.setPlayer.bind(this, 0)}>Next</button>
+    //       </section>
+    //       : <section className="player-setup-panel">
+    //         <label htmlFor="player2-setup">Player 2 Name:</label>
+    //         <input id="setupplayer-2" name="player2-setup" value={this.state.players[1].name}
+    //         onChange={(e) => this.handlePlayerNameChange(e, 2)}></input>
+    //         <button onClick={this.setPlayer.bind(this, 1)}>Play!</button>
+    //       </section>
+    //     }
+    //   </article>
+    // }
+
     return (
       <div className="App" >
-        {this.state.overlay 
-        ? <div id="overlay">
-          {this.state.gameStarted 
-            ? null 
-            : <button id="start" onClick={this.startGame}>Start Game</button>
-          }
-          </div>
-        : null 
+        {this.state.overlay
+          ? <Overlay 
+              setup={this.state.setup}
+              started={this.state.gameStarted}
+              startSetup={this.setUpGame.bind(this)} />
+          : null
         }
+        <PlayerDash 
+          turn={this.state.playerTurn} 
+          setup={this.state.setup}
+          started={this.state.gameStarted}
+          startGame={this.startGame.bind(this)} />
         <Board bank={this.state.cards} cardClick={this.cardClick} />
-      </div>
+      </div >
     );
   }
 }

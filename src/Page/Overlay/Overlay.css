@@ -10,7 +10,7 @@
   z-index: 5;
 }
 
-#overlay button {
+#overlay #start {
   position: absolute;
   top: 25%;
   left: 50%;
@@ -21,6 +21,7 @@
   cursor: pointer;
 }
 
-.App {
-  text-align: center;
+
+#overlay #start.hide {
+  display: none;
 }

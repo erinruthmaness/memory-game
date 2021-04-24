@@ -1,0 +1,52 @@
+/* #setup-panel {
+    position: fixed;
+    top: 10%;
+    bottom: 60%;
+    left: 30%;
+    right: 30%;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  } */
+
+.player.setup-panel {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    font-size: 18px;
+    background-color: white;
+    z-index: 12;
+}
+
+.player.setup-panel tr {
+    margin: 5px;
+}
+
+.player.setup-panel td {
+    width: 50%;
+}
+
+td.label {
+    text-align: right;
+}
+
+td.input {
+    text-align: left;
+    font-weight: bold;
+}
+
+#setup-panel.hide-setup {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    /* #setup-panel {
+        top: 20%;
+        bottom: 50%;
+        left: 5%;
+        right: 5%;
+    } */
+}
