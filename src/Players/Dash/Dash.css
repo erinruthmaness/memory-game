@@ -2,15 +2,23 @@
     position: fixed;
     top: 0;
     width: 100%;
+    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-color: white;
     border-bottom: 1px solid gray;
     box-shadow: 1px 1px 2px #00000075;
     cursor: default;
+    z-index: 10;
 }
 
-#player-bank.on-top {
-    background-color: white;
-    z-index: 10;
+/* #player-bank.winner-declared {
+
+} */
+
+@media only screen and (max-width: 600px) {
+    #player-bank {
+        height: 75px;
+    }
 }

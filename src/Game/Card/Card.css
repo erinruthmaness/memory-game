@@ -74,4 +74,9 @@
         font-size: 32px;
     }
 
+    .card.waiting:hover {
+        background-color: pink;
+        box-shadow: 2px 2px 5px #00000025;
+    }
+
 }

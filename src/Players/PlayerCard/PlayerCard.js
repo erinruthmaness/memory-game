@@ -4,19 +4,24 @@ import './PlayerCard.css';
 
 function Player(props) {
     return (
-        <table className={`player ${props.turn ? "my-turn" : ""}`}>
+        <table className={`player${props.turn ? " my-turn" : ""}${props.winner ? " winner-declared" : ""}`}>
             <tbody>
                 <tr>
                     <td className="label">Player {props.number}:</td>
-                    <td className="input">
                         {props.nameSet
-                        ? props.name
+                        ? <td className="input">
+                            {((props.winner === props.number) || (props.winner === 3))
+                                ? <span className="winner-crown">{String.fromCharCode("0xD83D", "0xDC51")}</span>
+                                : null
+                            }
+                            {props.name}
+                            </td>
                         : <Setup id={props.number}
                             name={props.name}
                             buttonFunc={props.setPlayer}
                             handleChange={props.handleChange} />
                     }
-                    </td>
+                    
                 </tr>
                 <tr>
                     <td className="label">Score:</td>

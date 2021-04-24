@@ -3,12 +3,6 @@ import './Setup.css';
 function Setup(props) {
 
     let index = parseInt(props.id) - 1;
-    // let buttontext = '';
-    // if (props.id === 1) {
-    //     buttontext = "Next"
-    // } else {
-    //     buttontext = "Play!"
-    // }
 
     return (
         <td className="input setup-panel">

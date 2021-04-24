@@ -11,14 +11,15 @@ class App extends Component {
     super(props);
     this.state = {
       overlay: true,
-      gameStarted: false,
-      setup: false,
+      setup: true,
       cards: [],
       firstClick: {
         name: null,
         id: null
       },
       playerTurn: 0,
+      playerScore: [0, 0],
+      winner: null
     };
   }
 
@@ -49,32 +50,46 @@ class App extends Component {
   }
 
   startGame = () => {
+    //play button after setting names
+    console.log("play");
+    this.setState({
+      overlay: false,
+      setup: false,
+      playerTurn: 1
+    })
     console.log(this.state)
-    //initial "Start Game button"
-    if (!this.state.gameStarted && !this.state.setup) {
-      console.log("start game");
-      this.setState({
-        setup: true
-      })
-      console.log(this.state)
-    } else if (!this.state.gameStarted && this.state.setup) {
-      //"play!" button after setting names
-      console.log("play");
-      this.setState ({
-        overlay: false,
-        gameStarted: true,
-        setup: false,
-        playerTurn: 1
-      })
-      console.log(this.state)
-      this.resetBoard();
-    } else {
-      console.log("error: gameStarted is " + this.state.gameStarted + " and setup is " + this.state.setup);
-    }
+    this.resetBoard();
   }
 
   resetBoard = () => {
-    this.setState({ cards: this.shuffle(bank) })
+    bank.forEach(card => {
+      card.status = "waiting";
+    })
+    this.setState({
+      cards: this.shuffle(bank)
+    })
+    if (this.state.winner) {
+      this.setState({
+        firstClick: {
+          name: null,
+          id: null
+        },
+        playerTurn: 0,
+        playerScore: [0, 0],
+        winner: null
+      })
+    }
+
+  }
+
+  gameOver = () => {
+    if (this.state.playerScore[0] > this.state.playerScore[1]) {
+      this.setState({ winner: 1 })
+    } else if (this.state.playerScore[0] < this.state.playerScore[1]) {
+      this.setState({ winner: 2 })
+    } else {
+      this.setState({ winner: 3 })
+    }
   }
 
   nextPlayer = (playerTurn) => {
@@ -95,67 +110,58 @@ class App extends Component {
     if (card1temp.name === card2temp.name) {
       animationStatus = "match"
       newStatus = "removed";
+      tempState.playerScore[tempState.playerTurn - 1]++;
     } else {
       animationStatus = "no-match"
       newStatus = "waiting";
       tempState.playerTurn = this.nextPlayer(tempState.playerTurn)
     }
-    //change the status of the cards on the page so they animate
+    //change the status of the cards on the page so they "animate"
     tempState.cards[stateIndex1].status = animationStatus
     tempState.cards[stateIndex2].status = animationStatus
     this.setState({ cards: tempState.cards })
     setTimeout(() => {
-      //three seconds later, give the new state with card statuses back to normal
-      //back to the cardClick function, which will set it to state and resume the game 
+      //three seconds later, update state (with card statuses back to normal)
+      //which will resume the game 
       tempState.cards[stateIndex1].status = newStatus
       tempState.cards[stateIndex2].status = newStatus
       this.setState({
         overlay: false,
         cards: tempState.cards,
         firstClick: { id: null, name: null },
-        playerTurn: tempState.playerTurn
+        playerTurn: tempState.playerTurn,
+        playerScore: tempState.playerScore
       })
-      console.log(this.state)
-    }, 1000)
+      if ((tempState.playerScore[0] + tempState.playerScore[1]) === 10) {
+        this.gameOver();
+      }
+    }, 500)
   }
 
   cardClick = (cardID, cardStatus, cardName) => {
     let tempState = this.state;
     let i = (tempState.cards).findIndex((stateCard) => stateCard.id === cardID)
-    switch (cardStatus) {
-      case "waiting":
-        tempState.cards[i].status = "clicked";
-        //first click of pair
-        if (tempState.firstClick.id === null) {
-          tempState.firstClick = { id: cardID, name: cardName }
-          this.setState({
-            cards: tempState.cards,
-            firstClick: tempState.firstClick
-          })
-          console.log(this.state)
-        } else { //second click of pair
-          this.setState({ overlay: true }) //prevents player from clicking again before match finishes
-          let matchIndex = (tempState.cards).findIndex((stateCard) => stateCard.id === tempState.firstClick.id)
-          //turns over clicked card
-          this.setState({
-            cards: tempState.cards,
-          })
-          //timer for a second so player can look at both cards
-          setTimeout(() => {
-            this.cardCompare(tempState, i, matchIndex)
-          }, 500)
-        }
-        break;
-      case "clicked":
-        tempState.cards[i].status = "waiting"
+    if (cardStatus === "waiting") {
+      tempState.cards[i].status = "clicked";
+      //first click of pair
+      if (tempState.firstClick.id === null) {
+        tempState.firstClick = { id: cardID, name: cardName }
+        this.setState({
+          cards: tempState.cards,
+          firstClick: tempState.firstClick
+        })
+      } else { //second click of pair
+        this.setState({ overlay: true }) //prevents player from clicking again before match finishes
+        let matchIndex = (tempState.cards).findIndex((stateCard) => stateCard.id === tempState.firstClick.id)
+        //turns over clicked card
         this.setState({
           cards: tempState.cards,
         })
-        break;
-      case "removed":
-        break;
-      default:
-        console.log("switch case error: ", cardStatus)
+        //timer for a second so player can look at both cards
+        setTimeout(() => {
+          this.cardCompare(tempState, i, matchIndex)
+        }, 200)
+      }
     }
   }
 
@@ -166,41 +172,22 @@ class App extends Component {
 
   render() {
 
-    // {!this.state.gameStarted
-    //   ? <button id="start" onClick={this.startGame}>Start Game</button>
-    //   : <article className={`player-setup${(this.state.setup) ? "" : " hide-setup"}`}>
-    //     {(!this.state.players[0].set)
-    //       ? <section className="player-setup-panel">
-    //         <label htmlFor="player1-setup">Player 1 Name:</label>
-    //         <input id="setupplayer-1" name="player1-setup" value={this.state.players[0].name}
-    //           onChange={(e) => this.handlePlayerNameChange(e, 1)}></input>
-    //         <button onClick={this.setPlayer.bind(this, 0)}>Next</button>
-    //       </section>
-    //       : <section className="player-setup-panel">
-    //         <label htmlFor="player2-setup">Player 2 Name:</label>
-    //         <input id="setupplayer-2" name="player2-setup" value={this.state.players[1].name}
-    //         onChange={(e) => this.handlePlayerNameChange(e, 2)}></input>
-    //         <button onClick={this.setPlayer.bind(this, 1)}>Play!</button>
-    //       </section>
-    //     }
-    //   </article>
-    // }
-
     return (
       <div className="App" >
-        {this.state.overlay
-          ? <Overlay 
-              setup={this.state.setup}
-              started={this.state.gameStarted}
-              startSetup={this.setUpGame.bind(this)} />
-          : null
-        }
-        <PlayerDash 
-          turn={this.state.playerTurn} 
+        <PlayerDash
+          turn={this.state.playerTurn}
+          scores={this.state.playerScore}
           setup={this.state.setup}
-          started={this.state.gameStarted}
-          startGame={this.startGame.bind(this)} />
-        <Board bank={this.state.cards} cardClick={this.cardClick} />
+          startGame={this.startGame.bind(this)}
+          winner={this.state.winner}
+          rematch={this.resetBoard.bind(this)} />
+        <div className="board-wrapper">
+          {this.state.overlay
+            ? <Overlay />
+            : null
+          }
+          <Board bank={this.state.cards} cardClick={this.cardClick} />
+        </div>
       </div >
     );
   }

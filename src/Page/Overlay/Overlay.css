@@ -1,27 +1,16 @@
 #overlay {
   width: 100vw;
   height: 100vh;
-  background-color: #88888890;
   position: fixed;
-  top: 0;
+  top: 101px;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 5;
 }
 
-#overlay #start {
-  position: absolute;
-  top: 25%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 6;
-  padding: 10px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-
-#overlay #start.hide {
-  display: none;
+@media only screen and (max-width: 600px) {
+  #overlay{
+      top: 76px;
+  }
 }

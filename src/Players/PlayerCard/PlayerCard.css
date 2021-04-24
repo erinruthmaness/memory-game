@@ -2,6 +2,11 @@
     margin: 20px auto;
     width: 40%;
     font-size: 18px;
+    color: gray;
+}
+
+.player.my-turn, .player.winner-declared {
+    color: black;
 }
 
 .player tr {
@@ -19,4 +24,18 @@ td.label {
 td.input {
     text-align: left;
     font-weight: bold;
+    position: relative;
+}
+
+.winner-crown {
+    position: absolute;
+    top: -8px;
+    left: -15px;
+    transform: rotate(-35deg)
+}
+
+@media only screen and (max-width: 600px) {
+    .player {
+        font-size: 14px;
+    }
 }

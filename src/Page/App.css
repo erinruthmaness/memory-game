@@ -1,3 +1,20 @@
 .App {
   text-align: center;
 }
+
+.board-wrapper {
+  position: fixed;
+  top: 101px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #80808025;
+  z-index: -1;
+  padding-bottom: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .board-wrapper {
+      top: 76px;
+  }
+}
