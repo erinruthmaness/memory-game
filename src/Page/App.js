@@ -188,6 +188,7 @@ class App extends Component {
           }
           <Board bank={this.state.cards} cardClick={this.cardClick} />
         </div>
+        <div id="app-footer"></div>
       </div >
     );
   }

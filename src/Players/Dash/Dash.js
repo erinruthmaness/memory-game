@@ -25,11 +25,10 @@ class Dash extends Component {
     }
 
     handlePlayerNameChange = (event) => {
-        if (event.target.value.length) {
-            let playerArray = this.state.players;
-            playerArray[parseInt(event.target.id.split("-")[1]) - 1].name = event.target.value
-            this.setState({ players: playerArray })
-        }
+        let playerArray = this.state.players;
+        playerArray[parseInt(event.target.id.split("-")[1]) - 1].name = event.target.value
+        this.setState({ players: playerArray })
+
     }
 
     setPlayer = (index) => {

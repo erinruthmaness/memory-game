@@ -1,14 +1,10 @@
 #player-bank {
-    position: fixed;
-    top: 0;
-    width: 100%;
+    width: 90%;
     height: 100px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     background-color: white;
     border-bottom: 1px solid gray;
     box-shadow: 1px 1px 2px #00000075;
+    padding: 0 5%;
     cursor: default;
     z-index: 10;
 }

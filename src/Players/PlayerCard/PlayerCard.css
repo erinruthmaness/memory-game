@@ -1,20 +1,50 @@
 .player {
     margin: 20px auto;
-    width: 40%;
     font-size: 18px;
-    color: gray;
 }
 
-.player.my-turn, .player.winner-declared {
+.player tbody {
+    display: block;
+    width: auto;
+    margin: 0 auto;
+}
+
+.player, .player td {
+    color: gray;
+    float: left;
+    width: 40%;
+}
+
+.player.my-turn td.label {
     color: black;
 }
 
-.player tr {
-    margin: 5px;
+.player-1, .player-1 td {
+    margin-right: 1%;
+    margin-left: 4%;
 }
 
-.player td {
-    width: 50%;
+.player.my-turn.player-1 td.input {
+    color: hotpink;
+}
+
+.player-2, .player-2 td {
+    margin-left: 1%;
+    margin-right: 4%;
+}
+
+.player.my-turn.player-2 td.input {
+    color: teal;
+}
+
+.player.winner-declared {
+    color: darkgoldenrod;
+}
+
+.player tr {
+    display: block;
+    float: left;
+    width: 100%;
 }
 
 td.label {
@@ -25,6 +55,7 @@ td.input {
     text-align: left;
     font-weight: bold;
     position: relative;
+    text-overflow: ellipsis;
 }
 
 .winner-crown {
@@ -35,7 +66,9 @@ td.input {
 }
 
 @media only screen and (max-width: 600px) {
+    
     .player {
         font-size: 14px;
     }
+
 }

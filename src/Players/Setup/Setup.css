@@ -1,52 +1,75 @@
-/* #setup-panel {
-    position: fixed;
-    top: 10%;
-    bottom: 60%;
-    left: 30%;
-    right: 30%;
-    z-index: 10;
-    background-color: white;
-    border: 1px solid black;
+.setup-panel {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-  } */
+}
 
-.player.setup-panel {
-    position: absolute;
-    top: 0px;
-    left: 0px;
+.setup-panel input, .setup-panel button {
+    margin: 0 auto;
+    width: 80%;
     font-size: 18px;
+}
+
+.setup-panel input {
+    margin-bottom: 5px;
+    border-color: transparent;
+    max-width: 400px;
+    text-align: center;
+}
+
+.setup-1 input {
+    background-color: #ff69b410;
+    box-shadow: 0px 5px 20px #ff69b415;
+}
+
+.setup-2 input {
+    background-color: #00808010;
+    box-shadow: 0px 5px 20px #00808015;
+}
+
+.setup-panel button {
+    max-width: 150px;
+    padding: 5px 0;
+    color: white;
+    border-color: transparent;
+    /* button styling by Sebastian on codepen */
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px #0000001a;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+.setup-panel button:hover {
+    transform: translateY(-1px);
     background-color: white;
-    z-index: 12;
 }
 
-.player.setup-panel tr {
-    margin: 5px;
+.setup-1 button {
+    background-color: hotpink;
 }
 
-.player.setup-panel td {
-    width: 50%;
+.setup-1 button:hover {
+    color: hotpink;
+    box-shadow: 0px 10px 12px #ff69b450;
 }
 
-td.label {
-    text-align: right;
+.setup-2 button {
+    background-color: teal;
 }
 
-td.input {
-    text-align: left;
-    font-weight: bold;
-}
-
-#setup-panel.hide-setup {
-    display: none;
+.setup-2 button:hover {
+    color: teal;
+    box-shadow: 0px 15px 20px #00808050;
 }
 
 @media only screen and (max-width: 600px) {
-    /* #setup-panel {
-        top: 20%;
-        bottom: 50%;
-        left: 5%;
-        right: 5%;
-    } */
+    .setup-panel input, .setup-panel button {
+        width: 95%;
+        font-size: 14px;
+    }
 }

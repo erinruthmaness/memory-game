@@ -5,11 +5,11 @@
 }
 
 .card {
-    height: 200px;
-    max-height: 100%;
-    width: 200px;
-    max-width: 100%;
     margin: auto;
+    width: 150px;
+    max-width: 100%;
+    height: 150px;
+    max-height: 100%;
     border-radius: 10px;
     border: 1px solid black;
     position: relative;
@@ -17,15 +17,16 @@
 }
 
 .card.waiting {
-    border-color: black;
-    background-color: pink;
+    border-color: transparent;
+    background: linear-gradient(to right, #dda0dd99, #87cefa99, #90ee9099, #ffffe099, #ffa07a99, #ffb6c199);
     box-shadow: 2px 2px 5px #00000025;
     cursor: pointer;
     z-index: 1;
 }
 
 .card.waiting:hover {
-    background-color: rosybrown;
+    border-color: #00000075;
+    background: linear-gradient(to right, #dda0dd, #87cefa, #90ee90, #ffffe0, #ffa07a, #ffb6c1);
     box-shadow: 1px 1px 2px #00000075;
 }
 
@@ -51,11 +52,8 @@
     cursor: auto;
 }
 
-.card.waiting .img, .card.removed .img {
-    visibility: hidden;
-}
-
 .card .img {
+    display: inline-block;
     font-size: 72px;
     cursor: default;
     position: absolute;
@@ -64,19 +62,19 @@
     transform: translate(-50%, -50%);
 }
 
+.card.waiting .img, .card.removed .img {
+    visibility: hidden;
+}
 
 @media only screen and (max-width: 600px) {
     .card {
         height: 75px;
     }
-    
     .card .img {
         font-size: 32px;
     }
-
     .card.waiting:hover {
         background-color: pink;
         box-shadow: 2px 2px 5px #00000025;
     }
-
 }
