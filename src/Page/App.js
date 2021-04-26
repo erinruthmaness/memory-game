@@ -74,7 +74,7 @@ class App extends Component {
           name: null,
           id: null
         },
-        playerTurn: 0,
+        playerTurn: 1,
         playerScore: [0, 0],
         winner: null
       })
@@ -186,7 +186,7 @@ class App extends Component {
             ? <Overlay />
             : null
           }
-          <Board bank={this.state.cards} cardClick={this.cardClick} />
+          <Board bank={this.state.cards} cardClick={this.cardClick} turn={this.state.playerTurn} />
         </div>
         <div id="app-footer"></div>
       </div >

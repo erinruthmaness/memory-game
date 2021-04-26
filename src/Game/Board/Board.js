@@ -10,7 +10,8 @@ function Board(props) {
                 u1={item.u1} u2={item.u2} 
                 name={item.name}
                 status={item.status}
-                cardClick={props.cardClick} />
+                cardClick={props.cardClick}
+                turn={props.turn} />
             })}
         </div>
     );

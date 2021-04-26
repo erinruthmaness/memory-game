@@ -52,7 +52,7 @@ class Dash extends Component {
 
     render() {
         return (
-            <aside id="player-bank" className={`${this.props.winner ? " winner-declared" : ""}`}>
+            <aside id="player-bank" className={`${this.props.winner ? " winner-declared" : ""} turn-${this.props.turn}`}>
                 {this.state.players.map(player => {
                     return <Player
                         key={`player-${player.id}`}

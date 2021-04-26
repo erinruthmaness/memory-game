@@ -9,9 +9,13 @@
     z-index: 10;
 }
 
-/* #player-bank.winner-declared {
+#player-bank.turn-1 {
+    background-color: #ff69b410
+}
 
-} */
+#player-bank.turn-2 {
+    background-color: #00808010
+}
 
 @media only screen and (max-width: 600px) {
     #player-bank {

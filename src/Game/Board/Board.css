@@ -10,14 +10,10 @@
     place-items: center center;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 650px), only screen and (max-height: 1000px) {
     .board {
-        grid-template-columns: repeat(4, minmax(0, 150px));
-    }
-}
+        grid-template-columns: repeat(4, minmax(75px, 1fr));
+        grid-template-rows: repeat(5, minmax(75px, 1fr));
 
-@media only screen and (max-height: 900px) {
-    .board {
-        
     }
 }

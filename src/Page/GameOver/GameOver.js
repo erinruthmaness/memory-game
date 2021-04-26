@@ -23,13 +23,13 @@ function GameOver(props) {
                 ? <span>{winnerName} wins!</span>
                 : <span>It's a tie!</span>
             }
-            <div class="pyro fireworks1"> {/* css fireworks by Eddie Lin on jsfiddle */}
-                <div class="before"></div>
-                <div class="after"></div>
+            <div className="pyro fireworks1"> {/* css fireworks by Eddie Lin on jsfiddle */}
+                <div className="before"></div>
+                <div className="after"></div>
             </div>
-            <div class="pyro fireworks2"> {/* css fireworks by Eddie Lin on jsfiddle */}
-                <div class="before"></div>
-                <div class="after"></div>
+            <div className="pyro fireworks2"> {/* css fireworks by Eddie Lin on jsfiddle */}
+                <div className="before"></div>
+                <div className="after"></div>
             </div>
             <button id="rematch" onClick={props.rematch}>Rematch?</button>
         </div>
