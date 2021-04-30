@@ -1,0 +1,110 @@
+#instructions {
+    margin: 10px auto;
+    margin-top: 120px;
+    width: 80%;
+    max-width: 600px;
+    padding: 4px;
+    background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
+    border: 1px solid gray;
+    box-shadow: 1px 1px 2px #00000075;
+}
+
+#instructions-wrapper {
+    background-color: white;
+    padding: 20px;
+}
+
+#instructions header {
+    margin-bottom: 20px;
+    line-height: 24px;
+    font-size: 24px;
+}
+
+#instructions .game-name {
+    font-weight: bold;
+}
+
+#instructions .line-break {
+    margin: 10px auto;
+    width: 80%;
+    height: 2px;
+}
+
+#instructions section {
+    font-size: 18px;
+    padding: 10px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.tooltip.email-copied {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+#my-email {
+    display: none;
+}
+
+#dismiss-instructions {
+    margin: 20px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#dismiss-instructions.pastel-rainbow-background:hover {
+    background: linear-gradient(to right, #ff339999, #e5ff0099, #00ff9599, #0099ff99, #6666ff99);
+    animation: rainbow_animation2 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+/* rainbow animation by Temani Afif & Austin Holland on stackoverflow*/
+
+@keyframes rainbow_animation2 {
+    0%, 100% {
+        background-position: 0 0;
+    }
+    50% {
+        background-position: 100% 0;
+    }
+}

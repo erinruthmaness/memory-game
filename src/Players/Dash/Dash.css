@@ -17,6 +17,23 @@
     background-color: #00808010
 }
 
+#toggle-instructions {
+    position: fixed;
+    display: block;
+    top: 40px;
+    right: 40px;
+    border: 1px solid gray;
+    height: 24px;
+    width: 24px;
+    padding: 0;
+    padding-left: 2px;
+    line-height: 24px;
+    text-align: center;
+    color: #555050;
+    font-size: 14px;
+    font-weight: bold;
+}
+
 @media only screen and (max-width: 600px) {
     #player-bank {
         height: 75px;

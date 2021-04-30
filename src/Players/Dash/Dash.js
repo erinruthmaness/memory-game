@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
+import Instructions from '../../Page/Instructions/Instructions';
 import Player from '../PlayerCard/PlayerCard';
 import GameOver from '../../Page/GameOver/GameOver';
 
@@ -20,15 +21,20 @@ class Dash extends Component {
                     name: "",
                     set: false
                 }
-            ]
+            ],
+            instructions: true
         };
+    }
+
+    toggleInstructions = () => {
+        let tempBool = this.state.instructions;
+        this.setState({ instructions: !tempBool})
     }
 
     handlePlayerNameChange = (event) => {
         let playerArray = this.state.players;
         playerArray[parseInt(event.target.id.split("-")[1]) - 1].name = event.target.value
         this.setState({ players: playerArray })
-
     }
 
     setPlayer = (index) => {
@@ -39,6 +45,7 @@ class Dash extends Component {
             //start the game if both names are set
             if (playerArray[0].set && playerArray[1].set) {
                 this.props.startGame();
+                this.setState({ instructions: false })
             }
         }
     }
@@ -52,7 +59,9 @@ class Dash extends Component {
 
     render() {
         return (
-            <aside id="player-bank" className={`${this.props.winner ? " winner-declared" : ""} turn-${this.props.turn}`}>
+            <aside id="player-bank" 
+                className={`${this.props.winner ? " winner-declared" : ""} turn-${this.props.turn}`}
+                key={this.props.setup}>
                 {this.state.players.map(player => {
                     return <Player
                         key={`player-${player.id}`}
@@ -74,6 +83,10 @@ class Dash extends Component {
                         player2={this.state.players[1]}
                         winner={this.props.winner}
                         rematch={this.props.rematch} />
+                    : null}
+                <button id="toggle-instructions" className="pastel-rainbow-background" onClick={this.toggleInstructions}>?</button>
+                {this.state.instructions
+                    ? < Instructions toggle={this.toggleInstructions.bind(this)} />
                     : null}
             </aside>
         )

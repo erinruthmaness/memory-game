@@ -21,6 +21,53 @@
   display: none;
 }
 
+button {
+  /* button styling by Sebastian on codepen */
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px #0000001a;
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  background-color: white;
+}
+
+.rainbow-text {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rainbow-background {
+  background: linear-gradient(78deg, #ff000096, #ff339900 60%),
+    linear-gradient(144deg, #ffff0096, #e5ff0000 60%),
+    linear-gradient(182deg, #00ff0096, #00ff9500 60%),
+    linear-gradient(226deg, #0000ff96, #0099ff00 60%),
+    linear-gradient(312deg, #ff00ff96, #6666ff00 60%);
+}
+
+.rainbow-stripes-background {
+  background: linear-gradient(to right, #ff000096, #ffff0096, #00ff0096, #0000ff96,  #ff00ff96);
+}
+
+.pastel-rainbow-background {
+  background: linear-gradient(78deg, #ff339996, #ff339900 50%),
+    linear-gradient(144deg, #e5ff0096, #e5ff0000 50%),
+    linear-gradient(182deg, #00ff9596, #00ff9500 50%),
+    linear-gradient(226deg, #0099ff96, #0099ff00 50%),
+    linear-gradient(312deg, #6666ff96, #6666ff00 50%);
+}
+
+.pastel-rainbow-stripes-background {
+  background: linear-gradient(to right, #ff339996, #e5ff0096, #00ff9596, #0099ff96, #6666ff96);
+}
 
 /* @media only screen and (max-width: 600px) {
 

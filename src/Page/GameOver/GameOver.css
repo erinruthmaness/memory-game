@@ -23,18 +23,9 @@
 
 #game-over button {
     padding: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2.5px;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0px 5px 10px #0000001a;
-    transition: all 0.3s ease 0s;
-    cursor: pointer;
-    outline: none;
 }
 
 #game-over button:hover {
-    transform: translateY(-1px);
     background-color: transparent;
     background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
     -webkit-background-clip: text;

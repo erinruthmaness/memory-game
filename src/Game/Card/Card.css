@@ -18,7 +18,7 @@
 
 .card.waiting {
     border-color: transparent;
-    background: linear-gradient(to right, #dda0dd99, #87cefa99, #90ee9099, #ffffe099, #ffa07a99, #ffb6c199);
+    background: linear-gradient(78deg, #ff339996, #ff339900 50%), linear-gradient(144deg, #e5ff0096, #e5ff0000 50%), linear-gradient(182deg, #00ff9596, #00ff9500 50%), linear-gradient(226deg, #0099ff96, #0099ff00 50%), linear-gradient(312deg, #6666ff96, #6666ff00 50%);
     box-shadow: 2px 2px 5px #00000025;
     cursor: pointer;
     z-index: 1;
@@ -26,7 +26,7 @@
 
 .card.waiting:hover {
     border-color: #00000075;
-    background: linear-gradient(to right, #dda0dd, #87cefa, #90ee90, #ffffe0, #ffa07a, #ffb6c1);
+    background: linear-gradient(78deg, #ff000096, #ff339900 60%), linear-gradient(144deg, #ffff0096, #e5ff0000 60%), linear-gradient(182deg, #00ff0096, #00ff9500 60%), linear-gradient(226deg, #0000ff96, #0099ff00 60%), linear-gradient(312deg, #ff00ff96, #6666ff00 60%);
     box-shadow: 1px 1px 2px #00000075;
 }
 
@@ -48,7 +48,7 @@
 
 .card.no-match {
     border-color: red;
-    background-color: red;
+    background-color: white;
 }
 
 .card.removed {
