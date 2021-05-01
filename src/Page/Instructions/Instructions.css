@@ -46,6 +46,7 @@
 .tooltip.email-copied {
     font-weight: normal;
     text-decoration: none;
+    cursor: default;
 }
 
 .tooltip .tooltip-text {

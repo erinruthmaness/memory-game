@@ -51,13 +51,11 @@ class App extends Component {
 
   startGame = () => {
     //play button after setting names
-    console.log("play");
     this.setState({
       overlay: false,
       setup: false,
       playerTurn: 1
     })
-    console.log(this.state)
     this.resetBoard();
   }
 
